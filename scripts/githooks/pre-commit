@@ -1,0 +1,59 @@
+#!/bin/sh
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+BOLD='\033[1m'
+NORMAL='\033[0m'
+
+STAGED_FILES_LINT=$(git diff --diff-filter=d --cached --name-only . |  grep -E '.*.(ts|js)$')
+STAGED_FILES_PRETTY=$(git diff --diff-filter=d --cached --name-only . |  grep -E '.*.(ts|js|md|json|yml)$')
+
+if [ -z "$STAGED_FILES_LINT" ] && [ -z "$STAGED_FILES_PRETTY" ]; then
+  printf "${GREEN}None of the staged files are required to be checked for format and lint issues.\n${NC}"
+  exit 0
+fi
+
+echo "Checking for format and lint issues before making a commit."
+echo "Checking required node packages for linting are installed"
+if [ ! -f "node_modules/.bin/eslint" ] || [ ! -f "node_modules/.bin/prettier" ]; then
+  echo "${RED}Node packages required for linting are not installed."
+  echo "Please run 'npm ci' to install these packages.${NC}"
+  exit 1
+fi
+echo "${GREEN}Yes they are!${NC}"
+
+if [ -n "$STAGED_FILES_LINT" ]; then
+  echo "Start linting..."
+  yarn eslint $STAGED_FILES_LINT
+  LINT_RESULT="$?"
+fi
+
+if [ -n "$STAGED_FILES_PRETTY" ]; then
+  yarn prettier --check $STAGED_FILES_PRETTY
+  PRETTY_RESULT="$?"
+fi
+
+fail_and_display_fix_message() {
+  echo "${RED}Please fix these issues and try to commit again.${NC}"
+  echo "${CYAN}Please run ${BOLD}yarn lint:fix:pretty${NORMAL}${CYAN} to recheck and have the issues fixed.${NC}"
+  exit 1
+}
+
+if [ -n "$LINT_RESULT" ] && [ $LINT_RESULT != 0 ] && [ -n "$PRETTY_RESULT" ] &&[ $PRETTY_RESULT != 0 ]; then
+  echo "${RED}There are lint and formatting issues.${NC}"
+  fail_and_display_fix_message
+fi
+
+if [ -n "$LINT_RESULT" ] && [ $LINT_RESULT != 0 ]; then
+  echo "${RED}There are lint errors.${NC}"
+  fail_and_display_fix_message
+fi
+
+if [ -n "$PRETTY_RESULT" ] && [ $PRETTY_RESULT != 0 ]; then
+  echo "${RED}There are formatting issues.${NC}"
+  fail_and_display_fix_message
+fi
+
+printf "${GREEN}There are no lint and formatting issues! 🥳🎉\n${NC}"

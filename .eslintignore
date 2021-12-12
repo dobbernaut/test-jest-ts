@@ -1,0 +1,21 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+
+# dotenv environment variables file
+.env
+.env.test
+
+# Editor stuff
+.idea/*
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Test temp and build files
+artifacts/
+dist/

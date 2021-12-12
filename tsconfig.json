@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "module": "commonjs",
+    "target": "es2021",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "types": ["node", "@types/jest"],
+    "paths": {
+      "@config/*": ["./config/*"],
+      "@constants/*": ["./constants/*"],
+      "@services/*": ["./services/*"]
+    }
+  },
+  "exclude": ["node_modules", "./.github", "./.vscode", "./artifacts", "./dist"]
+}
