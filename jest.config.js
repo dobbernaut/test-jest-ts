@@ -31,7 +31,7 @@ module.exports = {
   ],
   moduleNameMapper: {
     '^@config/(.*)$': '<rootDir>/config/$1',
-    '^@constants/(.*)$': '<rootDir>/constants/$1',
-    '^@services/(.*)$': '<rootDir>/services/$1',
+    '^@constant/(.*)$': '<rootDir>/constants/$1',
+    '^@service/(.*)$': '<rootDir>/services/$1',
   },
 };

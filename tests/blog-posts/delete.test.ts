@@ -1,5 +1,5 @@
-import { StatusCode } from '@constants/http-response-codes';
-import { BlogPost, BlogPosts } from '@services/blog-posts';
+import { StatusCode } from '@constant/http-response-codes';
+import { BlogPost, BlogPosts } from '@service/blog-posts';
 
 describe('Delete blog posts', function () {
   const blogPosts = new BlogPosts();

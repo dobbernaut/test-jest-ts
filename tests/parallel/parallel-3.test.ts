@@ -1,4 +1,4 @@
-import { pause } from '@services/utils';
+import { pause } from '@service/utils';
 
 describe('Parallel - 3 @grepthis', () => {
   it('should run in parallel', async () => {

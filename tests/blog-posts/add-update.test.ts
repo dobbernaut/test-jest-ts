@@ -1,5 +1,5 @@
-import { StatusCode } from '@constants/http-response-codes';
-import { BlogPost, BlogPosts, UpdateBlogPost } from '@services/blog-posts';
+import { StatusCode } from '@constant/http-response-codes';
+import { BlogPost, BlogPosts, UpdateBlogPost } from '@service/blog-posts';
 
 describe('Add update blog posts', function () {
   const blogPosts = new BlogPosts();
