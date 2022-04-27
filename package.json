@@ -1,19 +1,20 @@
 {
-  "name": "test-poc-jest-ts",
+  "name": "test-jest-ts",
   "version": "0.0.1",
-  "description": "jest test framework poc with typesript",
+  "description": "testing with jest in typescript",
   "license": "UNLICENSED",
   "scripts": {
+    "ci": "rm -rf node_modules && yarn install --frozen-lockfile",
     "preinstall": "sh ./scripts/preinstall.sh",
-    "prettier:check": "prettier --check .",
-    "prettier:write": "prettier --write .",
+    "prettier-check": "prettier --check .",
+    "prettier-write": "prettier --write .",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix && yarn lint",
-    "lint:pretty": "yarn lint && yarn prettier:check",
-    "lint:fix:pretty": "yarn lint:fix && yarn prettier:write",
+    "lint-fix": "eslint . --fix && yarn lint",
+    "lint-pretty": "yarn lint && yarn prettier-check",
+    "lint-fix-pretty": "yarn lint-fix && yarn prettier-write",
     "test": "jest",
-    "test:grep": "jest --testNamePattern ",
-    "test:watch": "jest --watch "
+    "test-grep": "jest --testNamePattern ",
+    "test-watch": "jest --watch "
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",
